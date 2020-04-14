@@ -21,12 +21,12 @@ void setup() {
   // put your setup code here, to run once:
 
   Serial.begin(9600);      // initialize serial communication
-  pinMode(9, OUTPUT);      // set the LED pin mode
+  pinMode(9, OUTPUT);      // set the pin mode
   pinMode(0, INPUT);
   myservo.attach(9);
   // for (pos = 180; pos >= 40; pos -= 1) { // goes from 180 degrees to 40 degrees
   // in steps of 1 degree
-  myservo.write(40);              // tell servo to go to position in variable 'pos'
+  myservo.write(40);              // tell servo to go to position 40
   delay(15);                       // waits 15ms for the servo to reach the position
   //}
   lock = "l";
@@ -51,7 +51,6 @@ void loop() {
   if (digitalRead(0) == HIGH && lock == "l") {
     doorBell = 1;
   }
-  //int motion = analogRead(A1);
 
   if (client) {
     Serial.println("new client");
@@ -87,13 +86,13 @@ void loop() {
           client.println("<h1>Security-Maintained and Real-Time Internet Operated House</h1>");
 
           if (header.indexOf("GET /u") >= 0 && lock == "l") {
-            myservo.write(180);              // tell servo to go to position in variable 'pos'
+            myservo.write(180);              // tell servo to go to position 180
             delay(15);                       // waits 15ms for the servo to reach the position
             lock = "u";
             doorBell = 0;
           }
           else if (header.indexOf("GET /l") >= 0 && lock == "u") {
-            myservo.write(40);              // tell servo to go to position in variable 'pos'
+            myservo.write(40);              // tell servo to go to position 40
             delay(15);                       // waits 15ms for the servo to reach the position
             lock = "l";
           }
